@@ -1,0 +1,11 @@
+Lecture_Output/
+*.log
+*.mp3
+*.mp4
+*.flac
+*.mka
+*.mkv
+*.wav
+*.ts
+mp3_parts/
+mp4_parts/
