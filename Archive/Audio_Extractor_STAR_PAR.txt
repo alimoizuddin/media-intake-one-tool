@@ -1,5 +1,5 @@
 AUDIO EXTRACTOR - STAR & PAR RESPONSES
-======================================
+=====================================
 
 
 THE NUMBERS
@@ -11,8 +11,7 @@ Per 3-hour lecture
   Upload + download     15-20 min           none (local)
   TOTAL TURNAROUND      ~75-80 min          ~40 sec (20-60s)
   Failed transfers      frequent            not possible (offline)
-  Files over 200 MB     split by hand       sized to fit; auto-
-                                            split only past ~4.5h
+  Files over 200 MB     split by hand       auto-split at 199 MB
 
 At 30 lectures/month (~90 hours of content)
   Before ...................... ~38 hours/month turnaround
@@ -34,10 +33,8 @@ TWO RULES WHEN USING THESE
    them, and manually splitting oversized files. Mention that
    separately - it makes the answer more credible, not less.
 
-2. The 40 seconds now needs no asterisk. The tool does audio only
-   - there is no video re-encoding step left in it - so the claim
-   holds for everything the tool does. That is worth one sentence
-   if anyone probes it.
+2. Keep "40 seconds" scoped to AUDIO EXTRACTION. The clean MP4
+   re-encode takes real time. Say it before anyone asks.
 
 
 STAR - SPOKEN, ABOUT 60 SECONDS
@@ -62,10 +59,9 @@ I found that the audio in these files didn't need converting at all
 - it needed extracting. So I built a drag-and-drop tool on FFmpeg
 that pulls the audio stream directly, and in the same pass produces
 a 16 kHz mono, loudness-normalised file tuned for transcription. I
-also sized the MP3 for the constraint that was causing the manual
-work: NotebookLM rejects any source over 200 MB, so I encode mono
-at 96 kbps, which puts a three-hour lecture near 130 MB. One file,
-no splitting, every time. It took me an hour to build.
+added automatic splitting at 199 MB, because NotebookLM rejects
+anything over 200 - so the manual splitting step disappeared too.
+It took me an hour to build.
 
 RESULT
 Turnaround per lecture went from about 75 minutes to roughly 40
@@ -88,8 +84,8 @@ file-splitting to stay under a 200 MB ingest cap.
 ACTION
 Built a drag-and-drop FFmpeg tool that extracts audio locally
 instead of converting it in the cloud, emits a transcription-ready
-16 kHz mono track in the same pass, and encodes the MP3 to sit
-under the 200 MB downstream ingest cap. One hour to build.
+16 kHz mono track in the same pass, and auto-splits output at
+199 MB to fit the downstream cap. One hour to build.
 
 RESULT
 Turnaround per lecture fell from ~75 minutes to ~40 seconds
@@ -119,9 +115,7 @@ KEEP IN YOUR POCKET FOR FOLLOW-UPS
 ----------------------------------
 
 - The tool eliminated a MANUAL step (splitting), not just a slow
-  one - and it did so by DESIGN, by encoding to fit the cap rather
-  than reacting to it. That is the difference between automating a
-  workaround and removing the need for one. Worth saying out loud.
+  one.
 - It is reusable by anyone who needs audio out of video, which
   turns a personal fix into something with leverage. Interviewers
   reward this heavily.
