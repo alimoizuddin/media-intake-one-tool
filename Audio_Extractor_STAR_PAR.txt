@@ -1,0 +1,121 @@
+AUDIO EXTRACTOR - STAR & PAR RESPONSES
+=====================================
+
+
+THE NUMBERS
+-----------
+
+Per 3-hour lecture
+                        BEFORE              AFTER
+  Conversion            ~60 min             -
+  Upload + download     15-20 min           none (local)
+  TOTAL TURNAROUND      ~75-80 min          ~40 sec (20-60s)
+  Failed transfers      frequent            not possible (offline)
+  Files over 200 MB     split by hand       auto-split at 199 MB
+
+At 30 lectures/month (~90 hours of content)
+  Before ...................... ~38 hours/month turnaround
+  After ....................... ~20 minutes/month
+  Annual .................... ~460 hours removed
+  Speed ..................... 4,500s -> 40s = >100x
+  Build cost ................ 1 hour
+  Payback ................... first lecture (saved ~74 min)
+  Licence ................... 999 INR/year eliminated
+
+
+TWO RULES WHEN USING THESE
+--------------------------
+
+1. Say TURNAROUND, not "hours of work". Much of the 38 hours was
+   waiting, not labour. If you claim saved labour, one question
+   ("did you sit and watch it?") puts you on the back foot.
+   The labour that WAS real: babysitting failed uploads, restarting
+   them, and manually splitting oversized files. Mention that
+   separately - it makes the answer more credible, not less.
+
+2. Keep "40 seconds" scoped to AUDIO EXTRACTION. The clean MP4
+   re-encode takes real time. Say it before anyone asks.
+
+
+STAR - SPOKEN, ABOUT 60 SECONDS
+-------------------------------
+
+SITUATION
+I run a transcription pipeline for lecture recordings - around 30
+files a month, roughly three hours each, so about 90 hours of
+content. The front end was a paid online converter at 999 rupees a
+year. A three-hour lecture took about an hour to convert, plus
+another 15 to 20 minutes to upload and download. Transfers failed
+partway often enough that I had to babysit them, and anything over
+the size cap I had to split by hand before it would even upload.
+
+TASK
+The conversion was pure overhead. It produced nothing I couldn't
+produce locally, and it was the slowest step in a pipeline where
+everything downstream was already automated.
+
+ACTION
+I found that the audio in these files didn't need converting at all
+- it needed extracting. So I built a drag-and-drop tool on FFmpeg
+that pulls the audio stream directly, and in the same pass produces
+a 16 kHz mono, loudness-normalised file tuned for transcription. I
+added automatic splitting at 199 MB, because NotebookLM rejects
+anything over 200 - so the manual splitting step disappeared too.
+It took me an hour to build.
+
+RESULT
+Turnaround per lecture went from about 75 minutes to roughly 40
+seconds - over a hundred times faster. At my volume that's around
+38 hours of turnaround removed per month, close to 460 hours a
+year, and the 999 rupee licence went away. It paid for its own
+build time on the very first file. It also runs entirely offline,
+so uploads can't fail and my content never leaves my machine.
+
+
+PAR - TIGHT, WRITTEN
+--------------------
+
+PROBLEM
+A paid cloud converter was the slowest step in my transcription
+pipeline: ~75 minutes of turnaround per 3-hour lecture across ~30
+lectures a month, with frequent failed uploads and manual
+file-splitting to stay under a 200 MB ingest cap.
+
+ACTION
+Built a drag-and-drop FFmpeg tool that extracts audio locally
+instead of converting it in the cloud, emits a transcription-ready
+16 kHz mono track in the same pass, and auto-splits output at
+199 MB to fit the downstream cap. One hour to build.
+
+RESULT
+Turnaround per lecture fell from ~75 minutes to ~40 seconds
+(>100x), removing ~460 hours of annual turnaround and a 999
+rupee/year licence. Payback on the first file. Fully offline - no
+failed transfers, no third-party handling of source material.
+
+
+RESUME BULLET - ONE LINE
+------------------------
+
+Replaced a paid cloud audio-conversion step with a local FFmpeg
+tool, cutting per-file turnaround from ~75 minutes to ~40 seconds
+(>100x) and removing ~460 hours of annual pipeline latency; built
+in one hour, payback on first use.
+
+
+SAFER VARIANT
+-------------
+
+Swap 30 lectures/month for your TYPICAL month rather than your
+peak. At 15/month the figure halves to ~230 hours a year - still
+excellent, and immune to "is 30 really your average?"
+
+
+KEEP IN YOUR POCKET FOR FOLLOW-UPS
+----------------------------------
+
+- The tool eliminated a MANUAL step (splitting), not just a slow
+  one.
+- It is reusable by anyone who needs audio out of video, which
+  turns a personal fix into something with leverage. Interviewers
+  reward this heavily.
